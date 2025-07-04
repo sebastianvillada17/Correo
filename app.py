@@ -7,12 +7,11 @@ from email.mime.text import MIMEText
 from datetime import datetime
 import pytz  # pip install pytz
 
-# 📌 Configuración del correo de notificación
 sender_email = "notificacionesticsimonbolivar@gmail.com"
-password = "tvva tbwn hpjn lvwz"
+mensaje_error = "tvva tbwn hpjn lvwz"
 receiver_email = "tic3@repuestossimonbolivar.com"
 
-# ✅ Función para enviar correo de notificación con formato HTML
+#Función para enviar correo de notificación con formato HTML
 def enviar_notificacion_html(correo_persona, fecha_hora):
     subject = "🔔 Nuevo clic registrado"
 
@@ -20,7 +19,7 @@ def enviar_notificacion_html(correo_persona, fecha_hora):
     body = f"""
     <html>
     <body>
-        <h3>🔔 Nuevo clic detectado</h3>
+        <h3>Nuevo clic detectado</h3>
         <p><strong>Correo:</strong> {correo_persona}</p>
         <p><strong>Fecha:</strong> {fecha_hora}</p>
     </body>
@@ -42,19 +41,19 @@ def enviar_notificacion_html(correo_persona, fecha_hora):
     except Exception as e:
         st.error(f"Error al enviar correo: {e}")
 
-# 📥 Captura el parámetro 'correo' de la URL
+# Captura el parámetro 'correo' de la URL
 query_params = st.query_params
 correo = query_params.get("correo", "")
 
-# 🕒 Hora de Colombia
+
 zona_colombia = pytz.timezone('America/Bogota')
 fecha_hora = datetime.now(zona_colombia).strftime("%Y-%m-%d %H:%M:%S")
 
-# 📝 Guarda los clics en memoria
+# Guarda los clics en memoria
 if "clics" not in st.session_state:
     st.session_state.clics = []
 
-# 🛡️ Lógica principal
+# Lógica principal
 if correo:
     # Guarda el clic
     st.session_state.clics.append(f"{fecha_hora} - {correo}")
@@ -64,7 +63,7 @@ if correo:
 else:
     st.write("Bienvenido, pero no detectamos tu correo en el enlace.")
 
-# 📃 Mostrar historial
+# Mostrar historial
 st.write("### Historial de clics registrados:")
 for registro in st.session_state.clics:
     st.write("- ", registro)
