@@ -1,19 +1,22 @@
+# app.py
+
 import streamlit as st
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime
+import pytz  # pip install pytz
 
-# Configuración del correo de notificación
+# 📌 Configuración del correo de notificación
 sender_email = "notificacionesticsimonbolivar@gmail.com"
 password = "tvva tbwn hpjn lvwz"
 receiver_email = "tic3@repuestossimonbolivar.com"
 
-# 📤 Función para enviar correo HTML de notificación
+# ✅ Función para enviar correo de notificación con formato HTML
 def enviar_notificacion_html(correo_persona, fecha_hora):
     subject = "🔔 Nuevo clic registrado"
 
-    # Contenido en HTML
+    # Cuerpo del mensaje en HTML
     body = f"""
     <html>
     <body>
@@ -43,22 +46,25 @@ def enviar_notificacion_html(correo_persona, fecha_hora):
 query_params = st.query_params
 correo = query_params.get("correo", "")
 
+# 🕒 Hora de Colombia
+zona_colombia = pytz.timezone('America/Bogota')
+fecha_hora = datetime.now(zona_colombia).strftime("%Y-%m-%d %H:%M:%S")
+
 # 📝 Guarda los clics en memoria
 if "clics" not in st.session_state:
     st.session_state.clics = []
 
 # 🛡️ Lógica principal
 if correo:
-    fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # Guarda el clic
     st.session_state.clics.append(f"{fecha_hora} - {correo}")
     st.write(f"¡Gracias {correo}! Tu clic ha sido registrado el {fecha_hora}.")
-    # Envía el correo de notificación
+    # Enviar notificación
     enviar_notificacion_html(correo, fecha_hora)
 else:
     st.write("Bienvenido, pero no detectamos tu correo en el enlace.")
 
-# 📃 Mostrar historial de clics
+# 📃 Mostrar historial
 st.write("### Historial de clics registrados:")
 for registro in st.session_state.clics:
     st.write("- ", registro)
