@@ -76,6 +76,6 @@ with open("doc/Correo_Sospechoso_Empresa_Segura.pdf", "rb") as f:
     pdf_bytes = f.read()
     b64_pdf = base64.b64encode(pdf_bytes).decode()
 
-href = f'<a href="data:application/pdf;base64,{b64_pdf}" download="Correo_Sospechoso_Empresa_Segura.pdf" target="_blank">Haz clic aquí para ver o descargar el PDF</a>'
+href = f'<a href="data:application/pdf;base64,{b64_pdf}" download="Correo_Sospechoso_Empresa_Segura.pdf" target="_blank">Haz clic aquí para descargar el PDF</a>'
 st.markdown(href, unsafe_allow_html=True)
 
