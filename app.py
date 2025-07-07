@@ -72,7 +72,8 @@ st.write("Lee la siguiente informacion para mas detalles y realiza el cuestionar
 # Muestra pdf
 st.write("### Información de Ciberseguridad")
 
-with open("Correo_Sospechoso_Empresa_Segura.pdf", "rb") as f:
+with open("doc/Correo_Sospechoso_Empresa_Segura.pdf", "rb") as f:
+
     base64_pdf = base64.b64encode(f.read()).decode('utf-8')
 
 pdf_display = f"""
