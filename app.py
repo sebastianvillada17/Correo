@@ -72,11 +72,10 @@ st.write("Lee la siguiente informacion para mas detalles y realiza el cuestionar
 # Muestra pdf
 st.write("### Información de Ciberseguridad")
 
-with open("doc/Correo_Sospechoso_Empresa_Segura.pdf", "rb") as f:
+with open("Correo_Sospechoso_Empresa_Segura.pdf", "rb") as f:
+    pdf_bytes = f.read()
+    b64_pdf = base64.b64encode(pdf_bytes).decode()
 
-    base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+href = f'<a href="data:application/pdf;base64,{b64_pdf}" download="Correo_Sospechoso_Empresa_Segura.pdf" target="_blank">Haz clic aquí para ver o descargar el PDF</a>'
+st.markdown(href, unsafe_allow_html=True)
 
-pdf_display = f"""
-    <iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="900" type="application/pdf"></iframe>
-"""
-st.markdown(pdf_display, unsafe_allow_html=True)
