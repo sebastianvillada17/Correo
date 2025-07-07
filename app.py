@@ -6,6 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime
 import pytz  # pip install pytz
+import base64
 
 sender_email = "notificacionesticsimonbolivar@gmail.com"
 mensaje_error = "tvva tbwn hpjn lvwz"
