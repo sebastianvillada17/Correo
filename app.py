@@ -9,7 +9,7 @@ import pytz  # pip install pytz
 import base64
 
 sender_email = "notificacionesticsimonbolivar@gmail.com"
-mensaje_error = "tvva tbwn hpjn lvwz"
+password = "tvva tbwn hpjn lvwz"
 receiver_email = "tic3@repuestossimonbolivar.com"
 
 #Función para enviar correo de notificación con formato HTML
