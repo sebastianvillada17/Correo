@@ -38,7 +38,7 @@ def enviar_notificacion_html(correo_persona, fecha_hora):
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message.as_string())
         server.quit()
-        st.success(f"Correo de notificación enviado por {correo_persona}")
+       
     except Exception as e:
         st.error(f"Error al enviar correo: {e}")
 
