@@ -54,16 +54,27 @@ if "clics" not in st.session_state:
     st.session_state.clics = []
 
 # Lógica principal
+st.title("Campaña: Correo sospechoso, empresa segura")
 if correo:
-    # Guarda el clic
-    st.session_state.clics.append(f"{fecha_hora} - {correo}")
-    st.write(f"¡Gracias {correo}! Tu clic ha sido registrado el {fecha_hora}.")
-    # Enviar notificación
-    enviar_notificacion_html(correo, fecha_hora)
+    # Guarda el clic y envía la notificación solo una vez por sesión
+    if "clic_registrado" not in st.session_state:
+        st.session_state.clics.append(f"{fecha_hora} - {correo}")
+        enviar_notificacion_html(correo, fecha_hora)
+        st.session_state.clic_registrado = True
 else:
     st.write("Bienvenido, pero no detectamos tu correo en el enlace.")
 
-# Mostrar historial
-st.write("### Historial de clics registrados:")
-for registro in st.session_state.clics:
-    st.write("- ", registro)
+# Mensaje de campaña 
+st.write(f"Estamos haciendo una campaña de ciberseguridad. Acabas de hacer clic en el enlace de un correo que te enviamos, no hagas clic en enlaces sospechosos. esto pone en riesgo la seguridad de tu información y la de la empresa. Si tienes dudas, contacta al departamento de TI.")
+st.write("Lee la siguiente informacion para mas detalles y realiza el cuestionario, recuerda que la seguridad de la empresa depende de todos nosotros.")
+
+# Muestra pdf
+st.write("### Información de Ciberseguridad")
+
+with open("Correo_Sospechoso_Empresa_Segura.pdf", "rb") as f:
+    base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+
+pdf_display = f"""
+    <iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="900" type="application/pdf"></iframe>
+"""
+st.markdown(pdf_display, unsafe_allow_html=True)
