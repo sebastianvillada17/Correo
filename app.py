@@ -14,13 +14,13 @@ receiver_email = "tic3@repuestossimonbolivar.com"
 
 #Función para enviar correo de notificación con formato HTML
 def enviar_notificacion_html(correo_persona, fecha_hora):
-    subject = "🔔 Nuevo clic registrado"
+    subject = "🔔 Nuevo clic a enlace sospechoso registrado"
 
     # Cuerpo del mensaje en HTML
     body = f"""
     <html>
     <body>
-        <h3>Nuevo clic detectado</h3>
+        <h3>Nuevo clic a enlace sospechoso detectado</h3>
         <p><strong>Correo:</strong> {correo_persona}</p>
         <p><strong>Fecha:</strong> {fecha_hora}</p>
     </body>
